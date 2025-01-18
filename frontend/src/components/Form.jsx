@@ -116,7 +116,7 @@ const Form = () => {
                 className="block text-gray-700 font-medium mb-2"
                 htmlFor="sportsHours"
               >
-                Sports Hours Per Week
+                Outside Activities Per Week
               </label>
               <input
                 type="number"

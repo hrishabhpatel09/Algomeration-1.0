@@ -31,6 +31,7 @@ const Astigmatism = () => {
       </div>
       <div className="w-[50%] px-20 border-l-neutral-200 border-2">
         <div className="flex flex-col justify-center items-center h-[30vh]">
+          <h1 className='text-4xl text-yellow-500'>Glare at Dot for 10 Seconds</h1>
           <h2 className="text-2xl">
             Do you notice any distortion / blurry / blindspot in the grid?
           </h2>

@@ -21,11 +21,17 @@ const SnellensTest = ({ isActive, setIsActive }) => {
         className="col-start-2 col-span-2"
         style={{}}
       />
-      <div className="grid h-[50%] grid-rows-11 col-start-4 col-span-3 px-20 pt-10 gap-2 cursor-pointer">
+      <div className="grid h-[90%] grid-rows-11 col-start-4 col-span-3 px-20 pt-10 gap-2 cursor-pointer">
+      <h1 className="text-3xl font-semibold text-gray-800 text-center">
+          Select the Lowest Line You Can Read
+        </h1>
+        <p className="text-gray-500 text-center">
+          Click on the line number corresponding to the smallest text you can see clearly.
+        </p>
         {Array.from({ length: 11 }, (_, i) => (
           <div
             key={i}
-            className={`row-span-1 flex h-full justify-center items-center w-[70%] rounded-md transition-all duration-200 
+            className={`ml-20 row-span-1 flex h-16 justify-center items-center w-[70%] rounded-md transition-all duration-200 
             ${
               activeIndex === i
                 ? "bg-[#117d66] text-white"

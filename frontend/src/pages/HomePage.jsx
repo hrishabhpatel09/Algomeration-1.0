@@ -1,6 +1,7 @@
 import React from 'react'
 import {motion} from "motion/react"
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Eye, ArrowRight, RotateCcw, Save, Activity, Shield, Clock, Brain } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 
@@ -32,6 +33,39 @@ const HomePage = () => {
             <FaArrowRightLong className='text-white ml-4'/>
         </div>
       </div>
+
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-36">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Clock className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Quick & Easy</h3>
+                <p className="text-gray-600">
+                  Complete your comprehensive vision assessment in just 5-10 minutes from any device.
+                </p>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Brain className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Smart Analysis</h3>
+                <p className="text-gray-600">
+                  Advanced algorithms analyze your vision test results and lifestyle factors.
+                </p>
+              </div>
+
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Shield className="w-6 h-6 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Personalized Care</h3>
+                <p className="text-gray-600">
+                  Receive tailored recommendations based on your unique vision profile.
+                </p>
+              </div>
+            </div>
     </div>
     </>
   )

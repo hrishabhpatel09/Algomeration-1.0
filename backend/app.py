@@ -26,7 +26,7 @@ def test():
     chronic_disease_in_parents = int(data['presenceofChronicdiseaseinParents'])
 
     model = pickle.load(open('./catboost_model.pkl', 'rb'))
-    arr = np.array([age,sports_hours,screen_time,study_hours,genetics_score,snellens_score,astigmatism_score,chronic_disease_in_parents,sleep_quality_score,blur_score]).reshape(1,-1)
+    arr = np.array([age,sports_hours/2,screen_time*2,study_hours,genetics_score,snellens_score,astigmatism_score,chronic_disease_in_parents,sleep_quality_score,blur_score]).reshape(1,-1)
     ans = model.predict_proba(arr)
     ans = ans[0][1];
     print(ans);
