@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from "motion/react";
 import { useDispatch } from 'react-redux';
-import { setBlurTestActive, setFormActive, } from '../redux/general.slice';
+import { setBlurTestActive, setFormActive, setBlurScore} from '../redux/general.slice';
 
 const BlurTest = () => {
   const [activeIndex, setActiveIndex] = React.useState(null);
@@ -10,6 +10,7 @@ const BlurTest = () => {
   const handleClick = (index) => {
     setActiveIndex(index);
     dispatch(setBlurTestActive(false));
+    dispatch(setBlurScore(index + 1));
     dispatch(setFormActive(true))
   };
 

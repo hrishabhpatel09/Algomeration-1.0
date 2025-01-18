@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion,AnimatePresence } from 'motion/react';
+import { useSelector } from 'react-redux';
+import axios from "axios"
 
 const Form = () => {
+  const {snellScore,astigmatismScore,blurScore} =  useSelector((state) => state.general);
+  const [isOpen,setIsOpen] = useState(false);
+  const [score,setScore] = useState(0);
+
+  console.log(snellScore,astigmatismScore,blurScore);
   const [formData, setFormData] = useState({
     age: '',
     sportsHours: '',
@@ -17,13 +24,47 @@ const Form = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert('Form submitted successfully!');
+  
+    const body = {
+      age: formData.age,
+      sportshr: formData.sportsHours,
+      screentime: formData.screenTime,
+      studyHr: formData.studyHours,
+      genetics: formData.eyeDisease === "Yes" ? 1 : 0,
+      sleepQualityScore: formData.sleepQuality,
+      presenceofChronicdiseaseinParents: formData.chronicDiseases === "Yes" ? 1 : 0,
+      snellScore: snellScore,
+      astScore: astigmatismScore,
+      blurScore: blurScore,
+    };
+  
+    try {
+      const res = await axios.post(
+        "http://127.0.0.1:5000/test",
+        body,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures the backend knows the body is JSON
+          },
+          withCredentials: true,
+          withXSRFToken: true // Send credentials if needed (cookies, sessions)
+        }
+      );
+      setScore(res.data.score);
+      setIsOpen(true);
+      console.log("Response:", res.data);  // Handle the response data
+    } catch (err) {
+      console.error("Error during API call:", err);
+      // Optionally handle the error (e.g., show a user-friendly message)
+    }
   };
+  
 
   return (
+    <>
+    <PopUp isOpen={isOpen} onClose={()=>setIsOpen(false)} score={score}/>
     <motion.div
       animate={{ x: 0 }}
       initial={{ x: +1000 }}
@@ -225,7 +266,51 @@ const Form = () => {
       </form>
       </div>
     </motion.div>
+    </>
   );
 };
 
+const getColor = (score) => {
+  if(score < 20) return 'bg-green-500';
+  if(score < 40) return 'bg-yellow-500 text-black';
+  if(score < 60) return 'bg-red-500';
+  if(score < 80) return 'bg-red-600';
+  return 'bg-red-700';
+}
+
+const PopUp = ({ isOpen, onClose,score }) => {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-30"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            className={`relative text-white p-4 h-[10vh] w-[70vw] rounded-md ${getColor((score.toFixed(4))*100)}  flex items-center`}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            transition={{ type: 'spring', stiffness: 120 }}
+          >
+            <button
+              className="absolute top-4 right-4 text-white bg-red-600 px-2 py-1 rounded"
+              onClick={onClose}
+            >
+              Close
+            </button>
+            <div className='flex justify-center items-center w-full'>
+                <h2 className={`text-3xl text-center`}>
+                {`Risk for Myopia is ${(score.toFixed(4))*100} %`}
+                </h2>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
 export default Form;

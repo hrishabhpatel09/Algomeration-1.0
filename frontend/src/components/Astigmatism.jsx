@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import gridImage from "/Grid.jpg";
 import { motion } from "motion/react";
 import { useDispatch } from "react-redux";
-import {setAstigmatismTestActive,setBlurTestActive} from "../redux/general.slice.js";
+import {setAstigmatismTestActive,setBlurTestActive,setAstigmatismScore} from "../redux/general.slice.js";
 
 const Astigmatism = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -11,11 +11,13 @@ const Astigmatism = () => {
   const handleNoClick = () =>{
     setSelectedOption("NO");
     dispatch(setAstigmatismTestActive(false));
+    dispatch(setAstigmatismScore(0));
     dispatch(setBlurTestActive(true));
   }
   const handleYesClick = () =>{
     setSelectedOption("YES")
     dispatch(setAstigmatismTestActive(false));
+    dispatch(setAstigmatismScore(1));
     dispatch(setBlurTestActive(true));
   }
   return (
