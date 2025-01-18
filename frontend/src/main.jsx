@@ -5,6 +5,8 @@ import App from './App.jsx'
 import {createBrowserRouter, createRoutesFromChildren, RouterProvider} from "react-router-dom"
 import EyeTestPage from './pages/EyeTestPage.jsx'
 import HomePage from './pages/HomePage.jsx'
+import { store } from './redux/store.js'
+import { Provider } from 'react-redux'
 
 
 const router = createBrowserRouter([
@@ -23,10 +25,13 @@ const router = createBrowserRouter([
     ]
   }, 
 ])
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <Provider store={store}>
    <RouterProvider router={router}>
-    <App/>
+      <App/>
    </RouterProvider>
+    </Provider>
   </StrictMode>,
 )

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import { useDispatch } from "react-redux";
+import {setSnellensTestActive,setAstigmatismTestActive} from "../redux/general.slice.js";
 
 const SnellensTest = ({ isActive, setIsActive }) => {
+  const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState(null);
   const handleClick = (idx) => {
     setActiveIndex(idx);
-    setIsActive(!isActive);
+    dispatch(setSnellensTestActive(false));
+    dispatch(setAstigmatismTestActive(true));
   };
 
   return (
