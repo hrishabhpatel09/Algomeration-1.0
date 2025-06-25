@@ -1,1 +1,1 @@
-# Algomeration-1.0
+# Agglomeration-1.0
